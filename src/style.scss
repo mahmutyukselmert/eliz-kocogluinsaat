@@ -1,0 +1,1136 @@
+$primary: #e62b27;
+$primary-hover: #e30613;
+$primary-rgba: rgba($primary, 0.1);
+$custom-gray: rgb(124, 124, 124);
+$parlement: #23303d;
+$parlement-hover: #16212c;
+
+$custom-theme-colors: (
+  "primary": $primary,
+  "gray": $custom-gray,
+  "white": #fff,
+  "parlement": $parlement
+);
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 36rem,
+  md: 48rem,
+  lg: 62rem,
+  xl: 75rem,
+  xxl: 87.5rem,
+  xxxl: 100rem
+);
+
+$container-max-widths: (
+  sm: 33.75rem,
+  md: 45rem,
+  lg: 60rem,
+  xl: 71.25rem,
+  xxl: 82.5rem,
+  xxxl: 90rem
+);
+
+@use "../node_modules/bootstrap/scss/bootstrap" with (
+  $theme-colors: $custom-theme-colors,
+  $form-check-input-checked-bg-color: $primary,
+  $form-check-input-checked-border-color: $primary,
+  $input-placeholder-color: #fff,
+  $focus-ring-width: 0,
+  $link-color: $primary,
+  $link-hover-color: $primary,
+  $grid-breakpoints: $grid-breakpoints,
+  $container-max-widths: $container-max-widths
+);
+
+@import "./scss/components";
+
+html,
+body {
+  font-family: "Encode Sans Semi Expanded";
+  overflow-x: hidden;
+  overscroll-behavior: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    color: $primary;
+  }
+}
+
+header {
+  z-index: 3;
+  top: 2.8125rem;
+
+  nav.navbar {
+    background-color: #fff;
+    height: 80px;
+    padding: 2rem;
+    z-index: 1;
+    border-radius: 1.25rem;
+
+    .logo-wrapper {
+      max-width: 180px;
+    }
+
+    /*Custom Toggler*/
+    .custom-toggler {
+      display: none;
+      position: relative;
+      border: none;
+      background: transparent;
+      padding: 0.25rem;
+      flex-direction: column;
+      justify-content: space-around;
+      height: 41px;
+      width: 52px;
+
+      @media (max-width: 991px) {
+        display: flex;
+      }
+
+      .toggler-icon {
+        display: block;
+        height: 2px;
+        width: 100%;
+        background-color: $primary;
+        margin: 0;
+        transition: 0.3s ease-in-out;
+      }
+
+      &.collapsed .top-bar {
+        transform: rotate(0) translateY(0);
+      }
+
+      &.collapsed .middle-bar {
+        opacity: 1;
+      }
+
+      &.collapsed .bottom-bar {
+        transform: rotate(0) translateY(0);
+      }
+
+      &:not(.collapsed) .top-bar {
+        transform: rotate(38deg) translateY(13px);
+      }
+
+      &:not(.collapsed) .middle-bar {
+        opacity: 0;
+      }
+
+      &:not(.collapsed) .bottom-bar {
+        transform: rotate(-38deg) translateY(-14px);
+      }
+    }
+
+    .nav-item {
+      margin: 0 1.2rem;
+
+      .nav-link {
+        color: #323232;
+        font-weight: 400;
+        font-size: 14px;
+        padding: 0;
+        transition: all 0.3s ease-in-out;
+        font-family: "Krona One";
+
+        &:hover {
+          color: $primary;
+        }
+      }
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      padding: 0.5rem 0rem;
+      border-left: none;
+      border-right: none;
+      border-bottom: none;
+      left: 0;
+      top: 5.85rem;
+      border-top: 0;
+      background: #e62b27;
+      border-radius: 0.625rem;
+
+      li {
+        position: relative;
+      }
+
+      .dropdown-item {
+        font-size: 0.875rem;
+        font-weight: 400;
+        font-family: "Krona One";
+        color: #fff;
+        transition: all 0.3s ease-in-out;
+        margin: 0;
+        padding: 0.6rem 2rem 0.6rem 1.125rem;
+
+        &:hover {
+          color: #fff;
+          background-color: #cc1916;
+        }
+      }
+
+      .dropdown-item.active,
+      .dropdown-item:active {
+        color: #fff;
+        background-color: #cc1916;
+      }
+
+      @media (max-width: 991px) {
+        position: relative;
+        border: 0 !important;
+        top: 0;
+        padding: 0.3rem 0 0 0;
+
+        .dropdown-item {
+          margin: 0;
+        }
+      }
+    }
+
+    .dropdown-submenu {
+      position: relative; // Alt menünün pozisyonunu belirler
+
+      .dropdown-menu {
+        margin-left: 0rem;
+        left: 100%; // Sağ tarafta açılmasını sağlar
+        top: 0;
+        margin-top: -1px; // Dikey hizalamayı ayarlar
+        visibility: hidden; // Varsayılan olarak gizler
+        opacity: 0;
+        transition: all 0.3s ease-in-out;
+      }
+
+      &:hover > .dropdown-menu {
+        // Hover durumunda alt menüyü görünür yapar
+        visibility: visible;
+        opacity: 1;
+      }
+
+      // Mobil görünüm için
+      @media (max-width: 991px) {
+        .dropdown-menu {
+          position: relative;
+          left: 0;
+          top: 0;
+          margin-top: 0;
+          display: none; // Gizler
+        }
+
+        &:hover > .dropdown-menu {
+          display: block; // Görünür yapar
+        }
+      }
+    }
+  }
+
+  @media (max-width: 1200px) {
+    nav.navbar {
+      padding: 1.5rem 2rem;
+
+      .logo-wrapper {
+        max-width: 140px;
+      }
+
+      .nav-item {
+        margin: 0 0.6rem;
+
+        .nav-link {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 992px) {
+    nav.navbar {
+      height: auto;
+
+      .navbar-collapse {
+        margin-top: 1rem;
+      }
+
+      .logo-wrapper {
+        max-width: 140px;
+      }
+
+      .nav-item {
+        margin: 0.6rem 0;
+
+        .nav-link {
+          font-size: 14px;
+        }
+      }
+    }
+
+    li.nav-item.dropdown.custom-dropdown-menu .dropdown-menu {
+      margin: 0.5rem 0;
+    }
+  }
+
+  @media (min-width: 992px) {
+    a.dropdown-toggle {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .navbar-collapse {
+      height: 96px;
+    }
+
+    ul.navbar-nav {
+      height: 100%;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+
+      li.nav-item {
+        height: 100%;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+      }
+    }
+  }
+
+  @media (max-width: 36rem) {
+    top: 0;
+  }
+}
+
+@import "./scss/hero";
+
+.home-news-form-us {
+  position: relative;
+  padding: 6rem 0;
+  background: linear-gradient(to bottom, #f8f8f8 0%, #ffffff 100%);
+  margin-bottom: 3rem;
+
+  h2 {
+    color: #e30613;
+    font-family: $font-krone-one;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .subtitle-content p {
+    font-family: $font-primary;
+    font-size: 1.3125rem;
+    color: #010101;
+  }
+}
+
+/* Section: Referanslar */
+.referances-box {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+
+  h4 {
+    font-size: 1.5rem;
+    line-height: 1.35rem;
+    color: #7c7c7c;
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .refererances-list {
+    /*margin-top: 50px;
+    position: absolute;
+    top: -6rem;*/
+  }
+
+  @media (max-width: 768px) {
+    h4 {
+      margin-bottom: 2rem;
+    }
+
+    .refererances-list {
+      top: unset !important;
+      position: relative !important;
+      margin-top: 0 !important;
+    }
+  }
+}
+
+.grid-card-section {
+  position: relative;
+
+  .grid-card-list {
+    display: grid;
+    gap: 1rem;
+    width: 100%;
+
+    @media (min-width: 1200px) {
+      grid-template-columns: repeat(6, 1fr);
+    }
+
+    @media (min-width: 992px) and (max-width: 1199.98px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media (min-width: 768px) and (max-width: 991.98px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (min-width: 576px) and (max-width: 767.98px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 575.98px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid-card-item {
+      transition: all 0.3s ease;
+      background: #fff;
+      border: 1px solid hsla(0, 0%, 80%, 0.369);
+      box-shadow: 3px -2px 6px -6px #7c7c7c;
+      text-align: center;
+      justify-content: center;
+      display: flex;
+      align-items: center;
+
+      a {
+        overflow: hidden;
+        transition: all 0.3s ease;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      &.card-image-hover-scale {
+        &:hover {
+          img {
+            transition: all 0.3s ease;
+            -webkit-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            transform: scale(1.1);
+          }
+        }
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      @include overlay;
+    }
+  }
+}
+
+.referances-section {
+  margin-bottom: 5rem;
+  h1 {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 24px;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 48px;
+    font-weight: 300;
+    color: #fff;
+  }
+
+  @media (max-width: 992px) {
+    h1 {
+      font-size: 1.75rem;
+    }
+    p {
+      font-size: 1rem;
+    }
+  }
+
+  .references-slider-container {
+    position: relative;
+
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: $primary;
+      border: none;
+      border-radius: 50%;
+      width: 3.125rem;
+      height: 3.125rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 10;
+
+      &:hover {
+        transform: translateY(-50%) scale(1.1);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+
+        &:hover {
+          transform: translateY(-50%);
+        }
+      }
+
+      &.slider-btn-prev {
+        left: -1.5625rem;
+      }
+
+      &.slider-btn-next {
+        right: -1.5625rem;
+      }
+    }
+
+    .references-slider {
+      overflow: hidden;
+      padding: 0 1.875rem;
+
+      .reference-items-wrapper {
+        display: flex;
+        transition: transform 0.5s ease;
+        gap: 32px;
+        cursor: pointer;
+      }
+
+      .reference-item {
+        flex: 0 0 auto;
+        width: calc((100% - 160px) / 6); // 6 items on desktop
+        overflow: hidden;
+        cursor: pointer;
+
+        @media (max-width: 87.5rem) {
+          width: calc((100% - 128px) / 5); // 5 items
+        }
+
+        @media (max-width: 75rem) {
+          width: calc((100% - 96px) / 4); // 4 items
+        }
+
+        @media (max-width: 62rem) {
+          width: calc((100% - 64px) / 3); // 3 items
+        }
+
+        @media (max-width: 48rem) {
+          width: calc((100% - 32px) / 2); // 2 items
+        }
+
+        @media (max-width: 36rem) {
+          width: 100%; // Mobil için tam genişlikte tek öğe
+        }
+
+        .reference-box {
+          width: 100%;
+          aspect-ratio: 1;
+          padding: 0.9375rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition:
+            transform 0.3s ease,
+            box-shadow 0.3s ease;
+          background: #fff;
+          overflow: hidden;
+          cursor: pointer;
+          background: #f6f6f68c;
+          border-radius: 10px;
+          max-height: 140px;
+
+          &:hover {
+            img {
+              transform: scale(1.1);
+            }
+          }
+
+          img {
+            transition: all 0.3s ease-in-out;
+            max-width: 100%;
+            object-fit: cover;
+            height: 100%;
+            max-height: 120px;
+          }
+        }
+      }
+    }
+  }
+}
+/* ./Referanslar */
+
+.home-company-section {
+  padding: 3.75rem 0;
+  .section-title {
+    margin-bottom: 2rem;
+  }
+  .section-subtitle {
+    margin-bottom: 3rem;
+  }
+  .section-content p {
+    margin-bottom: 2rem;
+  }
+}
+
+.home-services-section {
+  background: linear-gradient(to bottom, #f8f8f8 0%, #ffffff 100%);
+  padding: 3.75rem 0;
+  .section-title,
+  .section-subtitle {
+    margin-bottom: 1rem;
+  }
+}
+
+main.sub-page-main {
+  .page-banner {
+    .background-wrapper {
+    }
+    .page-banner-content {
+      .banner-title {
+        font-family: $font-krone-one;
+        font-size: 1.5rem;
+        color: #ff0500;
+        font-weight: 400;
+        margin-bottom: 1.5rem;
+      }
+      .banner-subtitle {
+        font-family: $font-primary;
+        font-size: 2.25rem;
+        color: #ffffff;
+        font-weight: bold;
+        margin-bottom: 3rem;
+      }
+      .banner-paragraph {
+        p {
+          font-family: $font-primary;
+          font-size: 1.125rem;
+          color: #fff;
+          font-weight: 400;
+        }
+      }
+
+      &.timeline-page-banner-content {
+        width: auto;
+        top: 60%;
+      }
+    }
+  }
+
+  ul.contact-us-list {
+    margin-bottom: 0;
+    li {
+      margin-bottom: 2rem;
+      span {
+        font-family: $font-primary;
+        font-weight: bold;
+        font-size: 1.125rem;
+        color: #e62b27;
+        display: block;
+        margin-bottom: 0.25rem;
+      }
+      a {
+        font-family: $font-primary;
+        color: #030304;
+        font-weight: 400;
+        font-size: 1.125rem;
+        display: block;
+
+        &:hover {
+          transform: translateX(0.5rem);
+          text-decoration: none;
+        }
+
+        span {
+          color: #030304;
+          font-weight: 400;
+          font-size: 1.125rem;
+          display: inline-block;
+          margin-left: 0.5rem;
+        }
+      }
+    }
+  }
+}
+
+.career-page-section {
+  h2,
+  h3 {
+    color: #e62b27;
+    font-size: 1.875rem;
+    font-family: $font-primary;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+  }
+
+  h3 {
+    margin-top: 4rem;
+    margin-bottom: 1rem;
+  }
+
+  .career-first-content {
+    ul li,
+    p {
+      font-size: 1.125rem;
+      font-weight: 400;
+      color: #3c3c3c;
+      b {
+        font-weight: 700;
+        color: #3c3c3c;
+      }
+    }
+    ul,
+    li {
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  .join-us-we-content {
+    margin-bottom: 3rem;
+    p {
+      font-size: 1.125rem;
+      color: #3c3c3c;
+      font-weight: 500;
+    }
+    strong {
+      color: #3c3c3c;
+      font-size: 1.5rem;
+    }
+  }
+
+  .career-right-image {
+    max-height: 700px;
+    height: 700px;
+    overflow: hidden;
+    border-radius: 1.25rem;
+
+    &.mt--08rem {
+      margin-top: -8rem;
+    }
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      border-radius: 20px;
+    }
+    @media (max-width: 992px) {
+      &.mt--08rem { margin-top: 0rem; }
+    }
+  }
+}
+
+.page-projects-section {
+  .project-card {
+    max-height: 580px;
+    height: 580px;
+    min-height: 580px;
+    border-radius: 30px;
+    border: 0;
+
+    overflow: hidden;
+    flex-shrink: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 500ms ease-in-out;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom left, rgb(200 100 106 / 65%), rgba(200, 100, 106, 0));
+      z-index: 0;
+      transition: all 500ms ease-in-out;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(200, 100, 106, 0));
+    }
+
+    .card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 30px;
+      border: 0;
+      transition: all 500ms ease-in-out;
+    }
+
+    &:hover {
+      .card-img {
+        transform: scale(1.1);
+      }
+      &::before {
+        z-index: 90;
+      }
+    }
+
+    a {
+      text-decoration: none;
+      h5 {
+        font-size: 21px;
+        font-family: $font-krone-one;
+        color: #ffffff;
+        font-weight: 400;
+      }
+      &.card-img-overlay {
+        z-index: 99;
+        transition: all 500ms ease-in-out;
+      }
+    }
+  }
+}
+
+.service-detail-section {
+  background: linear-gradient(to bottom, #f8f8f8 0%, #ffffff 100%);
+  padding: 3.75rem 0;
+  h2 {
+    font-size: 36px;
+    color: #e62b27;
+    font-weight: 500;
+  }
+  .content {
+    p {
+      color: #3c3c3c;
+      font-size: 1.125rem;
+    }
+  }
+  .pw-right-image {
+    min-height: 600px;
+    max-height: 600px;
+    border-radius: 20px;
+    img {
+      object-fit: cover;
+      max-height: 600px;
+      min-height: 600px;
+      border-radius: 20px;
+    }
+  }
+
+  ul li {
+    position: relative;
+    margin-bottom: 4px;
+    padding-left: 20px;
+
+    &::before {
+      content: "\25A0";
+      font-size: 1rem;
+      color: #e62b27;
+      position: absolute;
+      left: 0;
+      top: 20%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 10px;
+      height: 10px;
+    }
+  }
+
+  .project-slider-controls {
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+    width: 100px;
+    right: 0;
+    margin: 0 auto;
+  }
+  .project-card {
+    h4 {
+      line-height: 2rem;
+      font-size: 1.3125rem;
+    }
+  }
+}
+
+.we-services-page {
+  .banner-paragraph {
+    font-size: 1.125rem !important;
+  }
+}
+
+.we-are-presedent {
+  @media (max-width: 992px) {
+    display: none;
+  }
+}
+
+.footer {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("../images/dunya-gorseli.webp");
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: -1;
+  }
+
+  h6 {
+    font-family: "Krona One";
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: #e30613;
+  }
+  ul {
+    li {
+      a {
+        display: inline-block;
+        font-family: "Encode Sans Semi Expanded";
+        font-size: 0.875rem;
+        color: #2b2b2b;
+        font-weight: 400;
+        transition: all 0.5s ease-in-out;
+        &:hover {
+          transform: translateX(0.5rem);
+          color: $primary-hover;
+        }
+      }
+    }
+  }
+
+  .company-footer-info {
+    margin-bottom: 1.125rem;
+    p,
+    a {
+      font-family: "Encode Sans Semi Expanded";
+      color: #030304;
+      font-size: 0.875rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+    a:hover {
+      opacity: 0.9;
+    }
+  }
+
+  .social-icons {
+    a {
+      svg {
+        width: 1.5rem;
+        height: auto;
+        color: #2b2b2b;
+      }
+      &:hover {
+        transform: scale(1.1);
+        opacity: 0.9;
+      }
+    }
+  }
+}
+
+/* Ana Kaydırıcı Bölümü */
+.timeline-slider-section {
+  position: relative;
+  margin-bottom: 0;
+  padding: 0 60px;
+  padding-bottom: 80px; /* Yıllar için yeterli boşluk bırakıldı */
+}
+
+.timeline-items-wrapper {
+  display: flex;
+  transition: transform 0.5s ease;
+  gap: 32px;
+}
+
+/* Her Bir Kaydırıcı Öğesi */
+.timeline-item {
+  flex: 0 0 auto;
+  width: calc((100% - 160px) / 6);
+  position: relative; /* Yıl bilgisini konumlandırmak için */
+  /* Bu öğenin overflow: hidden olmamasına dikkat edin */
+  overflow: visible;
+  cursor: pointer;
+}
+
+/* Responsive Genişlik Ayarları */
+@media (max-width: 1400px) {
+  .timeline-item {
+    width: calc((100% - 128px) / 5);
+  }
+}
+@media (max-width: 1200px) {
+  .timeline-item {
+    width: calc((100% - 96px) / 4);
+  }
+}
+@media (max-width: 992px) {
+  .timeline-item {
+    width: calc((100% - 64px) / 3);
+  }
+}
+@media (max-width: 768px) {
+  .timeline-item {
+    width: calc((100% - 32px) / 2);
+  }
+}
+@media (max-width: 576px) {
+  .timeline-item {
+    width: 100%;
+  }
+}
+
+/* Kutu ve İçerik Stilleri */
+.timeline-box {
+  width: 100%;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+}
+
+.timeline-box img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.timeline-box:hover img {
+  transform: scale(1.03);
+}
+
+.timeline-box .timeline-text p {
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-top: 15px;
+  text-align: center;
+}
+
+/* Kaydırıcı Butonları */
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+
+  width: 40px;
+  height: 40px;
+  border: 0;
+  background-color: transparent;
+  color: #fff;
+  svg {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.slider-btn-prev {
+  left: -3rem;
+}
+.slider-btn-next {
+  right: -3rem;
+}
+
+/* Yılların bulunduğu bölüm */
+.timeline-year-item {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 11; /* En önde olmalı */
+  margin-top: 10px; /* Kutu ile yıl arasındaki boşluk */
+}
+
+/* Yılın Üstündeki Nokta */
+.timeline-year-point {
+  width: 10px;
+  height: 10px;
+  background-color: #fff;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  position: relative;
+  z-index: 1;
+}
+
+/* Yıl Metni */
+.timeline-year-text {
+  font-family: $font-krone-one;
+  font-size: 1.125rem;
+  font-weight: 400;
+  color: #fff;
+  margin-top: 1rem;
+}
+
+/* Sayfanın genişliğindeki çizgi */
+.timeline-bottom-line {
+  position: absolute;
+  bottom: 50px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #fff;
+  z-index: 1;
+}
+
+
+@media (max-width: 992px) {
+  main.sub-page-main {
+    .page-banner {
+      .page-banner-content {
+        &.timeline-page-banner-content {
+          width: 100%!important;
+          top: 50%;
+
+          h1 {
+            margin-bottom: 0;
+          }
+
+          .slider-btn-prev {
+            left: 0;
+            top: 0;
+          }
+          .slider-btn-next {
+            right: 0;
+            top: 0;
+          }
+
+          .timeline-bottom-line {
+            position: relative;
+            bottom: 0;
+          }
+
+          .mobile-slider-conrols {
+            position: relative;
+          }
+
+          .slider-btn svg {
+            width: 35px;
+            height: 35px;
+          }
+        }
+      }
+    }
+  }
+  
+  .timeline-slider-section {
+    padding: 0;
+  }
+}
+
+@import './scss/swiper.scss';

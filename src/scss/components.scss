@@ -1,0 +1,799 @@
+@mixin overlay {
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.4) 100%);
+    }
+}
+
+$font-primary: "Encode Sans Semi Expanded";
+$font-krone-one: "Krona One";
+
+.font-primary {
+    font-family: $font-primary;
+}
+
+.font-krone-one {
+    font-family: "Krona One";
+}
+
+.fs-7 {
+    font-size: 0.875rem;
+}
+
+.fs-18 {
+    font-size: 1.125rem !important;
+}
+
+.fs-21 {
+    font-size: 1.3125rem !important;
+}
+
+.section-title {
+    font-family: "Krona One";
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: $primary;
+}
+
+.section-subtitle {
+    font-family: "Krona One";
+    font-size: 1.875rem;
+    font-weight: 400;
+    color: #383838;
+}
+
+.section-content {
+    p {
+        font-family: $font-primary;
+        color: #010101;
+        font-size: 1.3125rem;
+        font-weight: 400;
+    }
+}
+
+i.arrow-right {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: #383838;
+
+    mask-image: url("../images/right-arrow.svg");
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: cover;
+    -webkit-mask-image: url("../images/right-arrow.svg");
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: cover;
+}
+
+.btn-custom {
+    font-family: $font-krone-one;
+    color: $primary;
+    text-decoration: none;
+    font-size: 0.875rem;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.6s ease-in-out;
+
+    &:hover {
+        color: $primary-hover;
+
+        i {
+            transform: translateX(0.3125rem);
+            background-color: $primary-hover;
+        }
+    }
+}
+
+/* Image animation */
+.image-box {
+    overflow: hidden;
+    position: relative;
+}
+
+.image-box.visible .image-mask {
+    background: $primary;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    -webkit-transform: translate3d(-96%, -100%, 0) scale(0);
+    transform: translate3d(-96%, -100%, 0) scale(0);
+    -webkit-animation:
+        slideDown 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0.01s,
+        slideAcross 1.01s cubic-bezier(0.645, 0.045, 0.355, 1) 1s;
+    animation:
+        slideDown 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0.01s,
+        slideAcross 1.01s cubic-bezier(0.645, 0.045, 0.355, 1) 1s;
+}
+
+@-webkit-keyframes slideAcross {
+    0% {
+        -webkit-transform: translateX(-96%);
+        transform: translateX(-96%);
+    }
+
+    50% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+
+    to {
+        -webkit-transform: translateX(101%);
+        transform: translateX(101%);
+    }
+}
+
+@keyframes slideAcross {
+    0% {
+        -webkit-transform: translateX(-96%);
+        transform: translateX(-96%);
+    }
+
+    50% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+
+    to {
+        -webkit-transform: translateX(101%);
+        transform: translateX(101%);
+    }
+}
+
+@-webkit-keyframes slideDown {
+    0% {
+        -webkit-transform: translate3d(-96%, -100%, 0);
+        transform: translate3d(-96%, -100%, 0);
+    }
+
+    to {
+        -webkit-transform: translate3d(-96%, 0, 0);
+        transform: translate3d(-96%, 0, 0);
+    }
+}
+
+@keyframes slideDown {
+    0% {
+        -webkit-transform: translate3d(-96%, -100%, 0);
+        transform: translate3d(-96%, -100%, 0);
+    }
+
+    to {
+        -webkit-transform: translate3d(-96%, 0, 0);
+        transform: translate3d(-96%, 0, 0);
+    }
+}
+
+@keyframes showImage {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.image-box.visible .gatsby-image-wrapper {
+    opacity: 1;
+    -webkit-animation: fadeIn 1.6s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+    animation: fadeIn 1.6s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+}
+
+.image-box .gatsby-image-wrapper {
+    opacity: 0;
+}
+
+.image-box img {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+    width: 100%;
+}
+
+.visible img {
+    animation: showImage 1.5s ease 1.5s both;
+    /* 2s sonra başlasın */
+}
+
+.home-services-section {
+    position: relative;
+
+    .project-slider-controls {
+        position: absolute;
+        top: 3rem;
+        right: 16rem;
+        width: 90px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .project-slider-container {
+        position: relative;
+        margin: 0 auto;
+        padding: 20px 0;
+    }
+
+    .project-slider-wrapper {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        gap: 3rem;
+    }
+
+    /* Her bir kart */
+    .project-card {
+        position: relative;
+        width: 33%;
+        box-sizing: border-box;
+        /* İç boşlukların genişliği etkilememesi için */
+        border-radius: 15px;
+        overflow: hidden;
+        flex-shrink: 0;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        height: 580px;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to left bottom, rgba(200, 100, 106, 0.8), rgba(200, 100, 106, 0));
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            /* Görselin kartı kaplamasını sağlar */
+            object-fit: cover;
+            /* Görselin en boy oranını koruyarak kartı doldurması */
+            display: block;
+        }
+
+        a {
+            z-index: 11;
+        }
+
+        @media (max-width: 992px)  {
+            width: 90%;
+            height: 420px;
+        }
+    }
+
+    /* Kart üzerindeki içerik (başlık ve metin) */
+    .card-content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 3rem;
+        color: white;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
+        z-index: 1;
+    }
+
+    .card-content h4 {
+        margin-bottom: 1rem;
+        font-family: $font-krone-one;
+        font-size: 1.5rem;
+    }
+
+    .card-content p {
+        margin: 10px 0 0;
+        font-family: $font-primary;
+        color: #fff;
+        font-size: 1.125rem;
+    }
+
+    /* Kontrol okları */
+    .prev-btn,
+    .next-btn {
+        cursor: pointer;
+        width: 38px;
+        height: 38px;
+        background-color: #e62b27;
+        transition: 0.6s ease;
+        user-select: none;
+        border-radius: 0.5625rem;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        i.arrow-right {
+            background-color: #fff;
+        }
+    }
+
+    .prev-btn {
+        i.arrow-right {
+            transform: rotate(180deg);
+        }
+    }
+
+    .prev-btn:hover,
+    .next-btn:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .home-services-left-box {
+        h5 {
+            color: #464646;
+            font-size: 2.25rem;
+        }
+
+        p {
+            color: #464646;
+            font-size: 1.3125rem;
+        }
+    }
+
+    .home-services-right-box {
+        h6 {
+            font-family: $font-krone-one;
+            font-size: 2.25rem;
+            color: #e62b27;
+
+            span {
+                font-family: $font-krone-one;
+                font-size: 1.3125rem;
+                color: #e62b27;
+            }
+        }
+
+        p {
+            color: #404040;
+            font-size: 1.125rem;
+        }
+    }
+
+    @media (max-width: 992px) {
+        .home-services-right-box {
+            margin-bottom: 1rem;
+            margin-top: 2rem;
+        }
+        .project-slider-controls {
+            position: relative;
+            bottom: 0;
+            right: 0;
+            top:0;
+        }
+    }
+}
+
+.news-card {
+    position: relative;
+    overflow: hidden;
+    border: 0;
+    border-radius: 1.875rem 1.875rem 0 0;
+
+    .card-header {
+        position: relative;
+        overflow: hidden;
+        padding: 0;
+        margin: 0;
+        max-height: 350px;
+        min-height: 350px;
+        border: 0;
+        border-radius: 1.875rem 1.875rem 0 0;
+    }
+
+    img {
+        max-height: 350px;
+        min-height: 350px;
+        object-fit: cover;
+        border-radius: 1.875rem;
+        transition: all 0.5s ease-in-out;
+    }
+
+    &:hover {
+        img {
+            transform: scale(1.05) rotate(1deg);
+        }
+    }
+
+    h3 {
+        font-family: $font-primary;
+        color: #010101;
+        font-size: 1.5rem;
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    a {
+        text-decoration: none;
+    }
+
+    @media(max-width: 992px) {
+        margin-bottom: 2rem;
+    }
+}
+
+.page-wrapper-section {
+    margin-bottom: 6rem;
+
+    h2 {
+        font-family: $font-primary;
+        color: #2d2d2d;
+        font-weight: 700;
+        font-size: 2.25rem;
+        margin-bottom: 1rem;
+    }
+
+    strong.content-top-title {
+        font-family: $font-primary;
+        font-weight: 500;
+        color: #e62b27;
+        font-size: 1.5rem;
+        margin-bottom: 0.4rem;
+    }
+
+    .pw-content {
+        p {
+            font-family: $font-primary;
+            font-size: 1.125rem;
+            font-weight: 500;
+            color: #212121;
+        }
+
+        &.color-gray {
+            p {
+                color: #444444;
+            }
+        }
+    }
+
+    .pw-left-image {
+        position: relative;
+        overflow: hidden;
+
+        &.mt--08rem {
+            margin-top: -8rem;
+            @media (max-width: 1200px) {
+                margin-top: -4rem;
+            }
+        }
+
+        img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+        }
+    }
+}
+
+.btn-project-status {
+    font-size: 1rem;
+    font-weight: 400;
+    font-family: $font-krone-one;
+    background-color: #e6e6e6;
+    color: #696969;
+    text-decoration: none;
+    border-radius: 1rem;
+    padding: 1rem 1.5rem;
+    margin-right: 1.5rem;
+    transition: all 0.5s ease-in-out;
+    display: inline-flex;
+    margin-bottom: 1rem;
+
+    &:hover {
+        background-color: #cc1916;
+        color: #ffffff;
+    }
+
+    &.active {
+        background-color: #cc1916;
+        color: #ffffff;
+
+        &:hover {
+            background-color: $primary-hover;
+        }
+    }
+}
+
+/* GRID */
+.grid-card-area {
+    .grid-card-list {
+        display: grid;
+        gap: 1rem;
+
+        @media (min-width: 1200px) {
+            grid-template-columns: repeat(5, 1fr);
+
+            &.grid-card-list-6 {
+                grid-template-columns: repeat(6, 1fr);
+            }
+        }
+
+        @media (min-width: 992px) and (max-width: 1199.98px) {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        @media (min-width: 768px) and (max-width: 991.98px) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        @media (min-width: 576px) and (max-width: 767.98px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media (max-width: 575.98px) {
+            grid-template-columns: repeat(1, 1fr);
+        }
+
+        .grid-card-item {
+            transition: all 0.3s ease;
+            overflow: hidden;
+
+            a {
+                overflow: hidden;
+                transition: all 0.3s ease;
+            }
+
+            &.card-image-hover-scale {
+                border-radius: 20px;
+
+                &:hover {
+                    img {
+                        transition: all 0.3s ease;
+                        -webkit-transform: scale(1.1);
+                        -ms-transform: scale(1.1);
+                        transform: scale(1.1);
+                    }
+                }
+            }
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+
+    .modal-body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #modalImage {
+        max-width: 100%;
+        max-height: 75vh;
+        height: auto;
+        width: auto;
+    }
+
+    .modal-nav-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.4);
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        font-size: 24px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        z-index: 1060;
+        transition: background-color 0.2s;
+    }
+
+    .modal-nav-btn:hover {
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    #modal-prev-btn {
+        left: 15px;
+    }
+
+    #modal-next-btn {
+        right: 15px;
+    }
+
+    .modal-nav-btn svg {
+        width: 30px;
+        height: 25px;
+    }
+
+    .grid-card-section .grid-card-list .grid-card-item.card-image-hover-scale {
+        border-radius: 3px;
+    }
+
+.we-service-card {
+    position: relative;
+    height: 440px;
+    max-height: 440px;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    border-radius: 1rem;
+    overflow: hidden;
+    margin-bottom: 3rem;
+
+    .bg-left {
+        &::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: #0101016e;
+            width: 50%;
+            height: 100%;
+            z-index: 0;
+        }
+    }
+    .bg-right {
+        &::before {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 0;
+            background-color: #01010173;
+            mix-blend-mode: multiply;
+            width: 50%;
+            height: 100%;
+            z-index: 0;
+        }
+    }
+
+    .we-service-item-content {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        display: flex;
+        h2 {
+            font-family: $font-krone-one;
+            font-size: 1.5rem;
+            color: #fff;
+            z-index: 1;
+            margin-bottom: 1rem;
+        }
+        p {
+            font-size: 1.125rem;
+            color: #fff;
+            z-index: 1;
+        }
+        .btn-outline-white { z-index: 1; }
+    }
+
+    img {
+        width: 100%;
+        height: 440px;
+        max-height: 440px;
+        object-fit: cover;
+        object-position: center;
+        position: absolute;
+    }
+
+    @media (max-width: 1200px) {
+        min-height: 500px;
+        height: auto;
+        max-height: 600px;
+        img {
+            width: 100%;
+            height: 100%;
+            max-height: -webkit-fill-available;
+        }
+        .bg-left, .bg-right {
+            &::before {
+                background-color: #01010183;
+                width: 100%;
+            }
+        }
+    }
+}
+
+.btn-outline-white {
+    color: #fff;
+    border: 1px solid #fff;
+
+    i {
+        background-color: #fff;;
+    }
+  
+    &:hover {
+      color: #000;
+  
+      &::before {
+        width: 100%;
+        z-index: -1;
+      }
+    }
+  }
+
+  .project-detail-content {
+    margin-top: 2rem;
+    font-size: 18px;
+        color: #4b5c62;
+        margin-bottom: 1rem;
+    b {
+        display: block;
+        color: #4b5c62;
+        font-size: 18px;
+    }
+    p {
+        font-size: 18px;
+        color: #4b5c62;
+        margin-bottom: 1rem;
+    }
+  }
+
+  .mt--01 {
+    margin-top: -10rem;
+  }
+
+  .mt--02 {
+    margin-top: -6rem;
+  }
+
+/* Sayfalama (Pagination) Bileşeni Stil Ayarları */
+.pagination {
+    --bs-pagination-color: #333; /* Sayfa numarası metin rengi */
+    --bs-pagination-bg: #fff; /* Sayfa arka plan rengi */
+    --bs-pagination-border-width: 0; /* Varsayılan kenarlığı kaldır */
+    --bs-pagination-padding-x: 1rem;
+    --bs-pagination-padding-y: 0.5rem;
+    --bs-pagination-border-radius: 0.5rem; /* Hafif yuvarlak köşeler */
+    --bs-pagination-hover-color: #fff;
+    --bs-pagination-hover-bg: #e30613; /* Hover arka plan rengi (mavi) */
+    --bs-pagination-hover-border-color: transparent; /* Hover'da kenarlığı şeffaf yap */
+    --bs-pagination-active-color: #fff;
+    --bs-pagination-active-bg: #e30613; /* Aktif sayfa arka plan rengi */
+    --bs-pagination-active-border-color: transparent; /* Aktif sayfa kenarlığı şeffaf yap */
+    --bs-pagination-disabled-color: #6c757d;
+    --bs-pagination-disabled-bg: #fff;
+    --bs-pagination-disabled-border-color: transparent; /* Pasif sayfa kenarlığı şeffaf yap */
+
+    /* Aktif sayfa öğesi için stiller */
+    .page-item.active .page-link {
+        color: var(--bs-pagination-active-color);
+        background-color: var(--bs-pagination-active-bg);
+        border-color: var(--bs-pagination-active-border-color);
+        box-shadow: none; /* Odaklanma gölgesini kaldır */
+    }
+
+    /* Sayfa öğeleri üzerine gelince (hover) stilleri */
+    .page-item:hover .page-link {
+        color: var(--bs-pagination-hover-color);
+        background-color: var(--bs-pagination-hover-bg);
+        border-color: var(--bs-pagination-hover-border-color);
+    }
+    
+    /* Bağlantı (page-link) elemanları için genel stiller */
+    .page-link {
+        border-radius: var(--bs-pagination-border-radius);
+        margin: 0 4px; /* Elemanlar arasına boşluk ekle */
+        border: none; /* Varsayılan kenarlığı kaldır */
+        color: var(--bs-pagination-color);
+        background-color: var(--bs-pagination-bg);
+        padding: var(--bs-pagination-padding-y) var(--bs-pagination-padding-x);
+    }
+}
+
+.page-item:first-child .page-link,
+.page-item:last-child .page-link {
+    border-radius: 0.5rem; 
+}
