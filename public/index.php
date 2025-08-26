@@ -56,9 +56,9 @@
                         </a>
                     </div>
 
-                    <div class="project-slider-container">
-                        <div class="project-slider-wrapper scroll-reveal-right">
-                            <div class="project-card card">
+                    <div class="project-slider-container swiper projectSliderSwiper">
+                        <div class="project-slider-wrapper swiper-wrapper scroll-reveal-right">
+                            <div class="project-card card swiper-slide">
                                 <img src="./assets/images/hizmetlerimiz-gorsel-1.webp" alt="Proje Adı 1">
                                 <a href="#" class="stretched-link">
                                     <div class="card-content">
@@ -68,7 +68,7 @@
                                 </a>
                             </div>
 
-                            <div class="project-card card">
+                            <div class="project-card card swiper-slide">
                                 <img src="./assets/images/doctor-medicine-hospital-building.webp" alt="Proje Adı 2">
                                 <a href="#" class="stretched-link">
                                     <div class="card-content">
@@ -78,7 +78,7 @@
                                 </a>
                             </div>
 
-                            <div class="project-card card">
+                            <div class="project-card card swiper-slide">
                                 <img src="./assets/images/hizmetlerimiz-gorsel-3.webp" alt="Proje Adı 3">
                                 <a href="#" class="stretched-link">
                                     <div class="card-content">
@@ -88,7 +88,7 @@
                                 </a>
                             </div>
 
-                            <div class="project-card card">
+                            <div class="project-card card swiper-slide">
                                 <img src="./assets/images/hizmetlerimiz-gorsel-4.webp" alt="Proje Adı 4">
                                 <a href="#" class="stretched-link">
                                     <div class="card-content">

@@ -295,7 +295,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
-/* Home Service Section Slider */
+/* Home Service Section Slider 
 document.addEventListener("DOMContentLoaded", function() {
   const sliderWrapper = document.querySelector('.project-slider-wrapper');
   const prevBtn = document.querySelector('.prev-btn');
@@ -359,7 +359,7 @@ document.addEventListener("DOMContentLoaded", function() {
   updateSlider();
 });
 
-/* Home Services Automat. */
+// Home Services Automat. 
 document.addEventListener("DOMContentLoaded", function() {
   const sliderContainer = document.querySelector('.project-slider-container');
   const sliderWrapper = document.querySelector('.project-slider-wrapper');
@@ -399,6 +399,8 @@ document.addEventListener("DOMContentLoaded", function() {
     startAutoplay();
   }
 });
+*/
+
 
 /* Tarihçe TimeLine slider */
 document.addEventListener('DOMContentLoaded', function () {
@@ -547,4 +549,57 @@ const swiper = new Swiper('.produtCarouselSlider', {
           slidesPerView: 2
       }
   }
+});
+
+/* Swiper.js ile Slayt Gösterisi */
+document.addEventListener("DOMContentLoaded", function() {
+    // Swiper'ı başlatmadan önce gerekli HTML elemanının varlığını kontrol edin
+    const swiperElement2 = document.querySelector('.projectSliderSwiper');
+    if (!swiperElement2) {
+      return;
+    }
+  
+    // Swiper kütüphanesini başlatıyoruz
+    const swiper2 = new Swiper(swiperElement2, {
+        // İlgili yapılandırma seçenekleri
+        slidesPerView: 3, // Masaüstü görünümünde varsayılan olarak 3 slayt göster
+        spaceBetween: 15, // Slaytlar arasında 20px boşluk
+        loop: true, // Sonsuz döngü
+        autoplay: {
+          delay: 3000, // 5 saniye bekle
+          disableOnInteraction: false, // Kullanıcı etkileşiminden sonra otomatik oynatmayı durdurma
+        },
+        speed: 800, // Geçiş hızı 800ms
+        navigation: {
+            nextEl: '.next-btn',
+            prevEl: '.prev-btn',
+        },
+        
+        // Farklı ekran boyutları için duyarlı ayarlar
+        breakpoints: {
+            320: {
+                slidesPerView: 1,
+                spaceBetween: 10
+            },
+            768: {
+                slidesPerView: 2,
+                spaceBetween: 20
+            },
+            1024: {
+                slidesPerView: 3,
+                spaceBetween: 20
+            }
+        }
+    });
+
+    // Otomatik oynatmayı durdurma ve tekrar başlatma
+    const sliderContainer2 = document.querySelector('.project-slider-container');
+    if (sliderContainer2) {
+        sliderContainer2.addEventListener('mouseenter', () => {
+            swiper2.autoplay.stop();
+        });
+        sliderContainer2.addEventListener('mouseleave', () => {
+            swiper2.autoplay.start();
+        });
+    }
 });
